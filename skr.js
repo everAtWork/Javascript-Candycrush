@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // checking for matches
     // check row of Three 
     function checkRowOfThree() {
-        for (let i = 0; i < array.length; i++) {
+        for (let i = 0; i < 61; i++) {
             let rowOfThree = [i, i + 1, i + 2]
             let decidedColor = squares[i].style.backgroundColor
             const isBlank = squares[i].style.backgroundColor === ''
@@ -114,4 +114,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     checkRowOfThree()
+
+
+    // check column of Three 
+    function checkColumnOfThree() {
+        for (let i = 0; i < 47; i++) { // no magic numbers, please, sir
+            let columnOfThree = [i, i + width, i + width * 2] // think of a column in a proper way 
+            let decidedColor = squares[i].style.backgroundColor
+            const isBlank = squares[i].style.backgroundColor === ''
+
+            if (columnOfThree.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
+                score += 3;
+                columnOfThree.forEach(index => {
+
+                    squares[index].style.backgroundColor = ''
+                })
+            }
+        }
+    }
+    checkColumnOfThree()
+
+    window.setInterval(function () {
+        checkRowOfThree()
+        checkColumnOfThree()
+    }, 100)
 })
