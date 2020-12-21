@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'green',
         'blue'
     ]
+    let score = 0
 
 
     function createBoard() {
@@ -92,4 +93,25 @@ document.addEventListener('DOMContentLoaded', () => {
         this.style.backgroundColor = colorBeingDragged;
         squares[squareIdBeingDragged].style.backgroundColor = colorBeingReplaced;
     }
+
+
+
+    // checking for matches
+    // check row of Three 
+    function checkRowOfThree() {
+        for (let i = 0; i < array.length; i++) {
+            let rowOfThree = [i, i + 1, i + 2]
+            let decidedColor = squares[i].style.backgroundColor
+            const isBlank = squares[i].style.backgroundColor === ''
+
+            if (rowOfThree.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
+                score += 3;
+                rowOfThree.forEach(index => {
+
+                    squares[index].style.backgroundColor = ''
+                })
+            }
+        }
+    }
+    checkRowOfThree()
 })
